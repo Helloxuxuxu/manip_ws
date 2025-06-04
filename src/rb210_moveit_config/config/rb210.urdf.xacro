@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rb210">
+    <xacro:arg name="initial_positions_file" default="$(find rb210_moveit_config)/config/initial_positions.yaml" />
+
+    <!-- Import rb210 urdf file -->
+    <xacro:include filename="$(find rb210_description)/urdf/rb210.urdf.xacro" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="$(find rb210_moveit_config)/config/rb210.ros2_control.xacro" />
+
+
+    <xacro:rb210_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
+
+</robot>

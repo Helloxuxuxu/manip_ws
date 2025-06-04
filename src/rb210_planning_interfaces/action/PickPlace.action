@@ -1,0 +1,12 @@
+# 目标 - 要发送给服务器的信息
+geometry_msgs/Pose pick_pose
+geometry_msgs/Pose place_pose
+string object_id
+---
+# 结果 - 服务器完成时发送的信息
+int8 success
+string message
+---
+# 反馈 - 执行期间定期发送的信息
+float32 completion_percentage
+string current_state

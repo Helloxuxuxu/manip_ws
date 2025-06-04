@@ -1,0 +1,6 @@
+string status
+uint32 num_of_people
+---
+bool success
+int8 code
+string msg

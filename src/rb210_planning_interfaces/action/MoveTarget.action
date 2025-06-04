@@ -1,0 +1,14 @@
+# Goal
+float64[] joints_target
+float64[] pos_target
+int8 type # 类型，0:MOVJ(关节) 1:MOVJD(笛卡尔关节) 2:MOVL(直线) 3:MOVC(圆弧)
+
+---
+# Result
+int8 error_code
+string error_string
+
+---
+# Feedback
+float64[] joints_current
+float64[] pos_current
