@@ -8,6 +8,7 @@
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>rb210_planning_interfaces</build_depend>
 
   <depend>rclcpp</depend>
   <depend>trajectory_msgs</depend>

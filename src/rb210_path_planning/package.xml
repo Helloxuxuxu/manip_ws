@@ -8,6 +8,7 @@
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>rb210_planning_interfaces</build_depend>
   <build_depend>launch</build_depend>
   <exec_depend>launch</exec_depend>
 
