@@ -54,7 +54,7 @@ def generate_launch_description():
     declare_urdf_cmd = DeclareLaunchArgument(
         'urdf_file',
         default_value=os.path.join(bringup_dir, 'urdf', 'rb210.urdf.xacro'),
-        description='Whether to start RVIZ')
+        description='Path to the URDF or Xacro file to load')
  
 
     start_robot_state_publisher_cmd = Node(

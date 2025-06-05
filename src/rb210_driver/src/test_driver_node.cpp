@@ -69,7 +69,7 @@ private:
         trajectory_msgs::msg::JointTrajectoryPoint point;
         point.positions = waypoints[i];
         traj_goal_.push_back(point);
-        RCLCPP_INFO(this->get_logger(), "Waypoint %zu: velocity = %f,%f,%f,%f,%f,%f.", i, 
+        RCLCPP_INFO(this->get_logger(), "Waypoint %zu: joints point = %f,%f,%f,%f,%f,%f.", i, 
         waypoints[i][0],waypoints[i][1],waypoints[i][2],
         waypoints[i][3],waypoints[i][4],waypoints[i][5]);
       }
@@ -93,14 +93,14 @@ private:
       return;
     }
     
-    auto goal_handle = future_goal_handle.get();  // 获取 GoalHandle
+    auto goal_handle = future_goal_handle.get();  // 阻塞获取 GoalHandle
     if (!goal_handle) {
       RCLCPP_ERROR(get_logger(), "Goal was rejected by the action server.");
       return;
     }
     // 等待结果
     auto result_future = traj_action_client_->async_get_result(goal_handle);
-    RCLCPP_INFO(get_logger(), "Waiting for result...");
+    RCLCPP_INFO(get_logger(), "sendTrajGoal Client Waiting for result...");
     if (rclcpp::spin_until_future_complete(this->get_node_base_interface(), result_future) ==
         rclcpp::FutureReturnCode::SUCCESS)
     {
@@ -145,7 +145,7 @@ private:
     if (rclcpp::spin_until_future_complete(this->get_node_base_interface(), future_goal_handle) !=
         rclcpp::FutureReturnCode::SUCCESS)
     {
-      RCLCPP_ERROR(get_logger(), "Goal was not accepted.");
+      RCLCPP_ERROR(get_logger(), "move_action_client: Goal was not accepted.");
       return;
     }
     
@@ -156,12 +156,12 @@ private:
     }
     // 等待结果
     auto result_future = move_action_client_->async_get_result(goal_handle);
-    RCLCPP_INFO(get_logger(), "Waiting for result...");
+    RCLCPP_INFO(get_logger(), "move_action_client: Waiting for result...");
     if (rclcpp::spin_until_future_complete(this->get_node_base_interface(), result_future) ==
         rclcpp::FutureReturnCode::SUCCESS)
     {
       auto result = result_future.get();
-      RCLCPP_INFO(get_logger(), "Goal completed. Result code: %d", static_cast<int>(result.result->error_code));
+      RCLCPP_INFO(get_logger(), "move_action_client: Goal completed. Result code: %d", static_cast<int>(result.result->error_code));
     }
     else{
       RCLCPP_ERROR(get_logger(), "Failed to get result");
@@ -173,20 +173,20 @@ private:
   void traj_result_callback(const GoalHandleFollowJointTrajectory::WrappedResult & result)
   {
     if (result.code == rclcpp_action::ResultCode::SUCCEEDED) {
-      RCLCPP_INFO(this->get_logger(), "Result received:");
-      RCLCPP_INFO(this->get_logger(), "error_code: %d", result.result->error_code);
+      RCLCPP_INFO(this->get_logger(), "traj_result_callback: Result received:");
+      RCLCPP_INFO(this->get_logger(), "traj_result_callback: error_code: %d", result.result->error_code);
     } else {
-      RCLCPP_WARN(this->get_logger(), "Goal failed or was canceled.");
+      RCLCPP_WARN(this->get_logger(), "traj_result_callback: Goal failed or was canceled.");
     }
   }
 
   void move_result_callback(const GoalHandleMoveTarget::WrappedResult & result)
   {
     if (result.code == rclcpp_action::ResultCode::SUCCEEDED) {
-      RCLCPP_INFO(this->get_logger(), "Result received:");
-      RCLCPP_INFO(this->get_logger(), "error_code: %d", result.result->error_code);
+      RCLCPP_INFO(this->get_logger(), "move_result_callback: Result received:");
+      RCLCPP_INFO(this->get_logger(), "move_result_callback: error_code: %d", result.result->error_code);
     } else {
-      RCLCPP_WARN(this->get_logger(), "Goal failed or was canceled.");
+      RCLCPP_WARN(this->get_logger(), "move_result_callback: Goal failed or was canceled.");
     }
   }
 

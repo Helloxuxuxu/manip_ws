@@ -1,0 +1,4 @@
+alias cb++='colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --symlink-install'
+alias cb+='colcon build --symlink-install'
+alias cb+_ps='colcon build --symlink-install --packages-select'
+alias cb++_ps='colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --symlink-install --packages-select'

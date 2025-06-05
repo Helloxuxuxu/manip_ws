@@ -1,0 +1,24 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/nihao/workspace/manip_ws/install/rb210_planning_interfaces/local/lib/python3.10/dist-packages",
+        "/home/nihao/workspace/manip_ws/install/rb210_description/lib/python3.10/site-packages",
+        "/home/nihao/APP/moveit2_ws/install/moveit_task_constructor_core/local/lib/python3.10/dist-packages",
+        "/home/nihao/APP/moveit2_ws/install/moveit_configs_utils/lib/python3.10/site-packages",
+        "/home/nihao/APP/moveit2_ws/install/srdfdom/local/lib/python3.10/dist-packages",
+        "/home/nihao/APP/moveit2_ws/install/moveit_task_constructor_msgs/local/lib/python3.10/dist-packages",
+        "/home/nihao/APP/moveit2_ws/install/launch_param_builder/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/nihao/workspace/manip_ws/install/rb210_planning_interfaces/local/lib/python3.10/dist-packages",
+        "/home/nihao/workspace/manip_ws/install/rb210_description/lib/python3.10/site-packages",
+        "/home/nihao/APP/moveit2_ws/install/moveit_task_constructor_core/local/lib/python3.10/dist-packages",
+        "/home/nihao/APP/moveit2_ws/install/moveit_configs_utils/lib/python3.10/site-packages",
+        "/home/nihao/APP/moveit2_ws/install/srdfdom/local/lib/python3.10/dist-packages",
+        "/home/nihao/APP/moveit2_ws/install/moveit_task_constructor_msgs/local/lib/python3.10/dist-packages",
+        "/home/nihao/APP/moveit2_ws/install/launch_param_builder/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
