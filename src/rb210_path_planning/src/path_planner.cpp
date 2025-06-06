@@ -899,7 +899,7 @@ bool ManipPlanner::planCartPath(const std::string plan_id, const geometry_msgs::
 
   rclcpp::Time end_time = clock.now();
   double duration = (end_time - start_time).seconds();
-  RCLCPP_INFO(LOGGER, "PlanL %s took %.4f seconds", plan_id.c_str(), duration);
+  RCLCPP_INFO(LOGGER, "planCartPath %s took %.4f seconds", plan_id.c_str(), duration);
 
   // 添加轨迹到计划中
   moveit::planning_interface::MoveGroupInterface::Plan plan;
@@ -1321,7 +1321,7 @@ bool ManipPlanner::AddBoxObject(const std::string &id, const std::vector<double>
   moveit_msgs::msg::CollisionObject box_object;
   box_object.header.frame_id = move_group_interface_->getPlanningFrame();
   box_object.id = id;
-  box_object.primitives.resize(1);
+  box_object.primitives.resize(1);  //简单物体只有一个primitive，可用多个primitive组合复杂物体
   box_object.primitives[0].type = shape_msgs::msg::SolidPrimitive::BOX;
   box_object.primitives[0].dimensions.resize(3);
   box_object.primitives[0].dimensions[shape_msgs::msg::SolidPrimitive::BOX_X] = params[7];
@@ -1500,6 +1500,7 @@ bool ManipPlanner::attachObject(const std::string &id)
   shape_msgs::msg::SolidPrimitive primitive;
   primitive.type = primitive.BOX;
   primitive.dimensions = {0.1, 0.1, 0.2}; // 与原始一致
+
   attached_object.object.primitives.push_back(primitive);
   geometry_msgs::msg::Pose stick_pose;
   stick_pose.position.x = 0;

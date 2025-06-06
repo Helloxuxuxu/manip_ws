@@ -89,8 +89,8 @@ private:
 
   // 路径规划
   std::map<std::string, geometry_msgs::msg::Pose> poses_map_; // 运动途径目标点
-  MovePlansMap plan_map_; // 运动路径
-  MovePlans move_plans_;
+  MovePlansMap plan_map_; // 存储运动路径，通过步骤名字查询
+  MovePlans move_plans_;  // 顺序运动路径，一次规划步骤首尾连接
 
 public:
   std::map<std::string, geometry_msgs::msg::Pose> getPosesMap(){return poses_map_;}
