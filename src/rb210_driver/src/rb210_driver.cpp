@@ -78,7 +78,7 @@ void DriverNode::readData()
   }
   for (int i = 0; i < 6; i++)
   {
-    dcart_positions_[i] = joints[i];
+    dcart_positions_[i] = dcart[i];
   }
   tf2::Quaternion q;
   q.setRPY(dcart_positions_[5], dcart_positions_[4], dcart_positions_[3]);
@@ -116,6 +116,7 @@ rclcpp_action::GoalResponse DriverNode::traj_handle_goal(
   {
     RCLCPP_INFO(get_logger(), "running flag is true.");
     return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
+    // return rclcpp_action::GoalResponse::REJECT;
   }
   (void)uuid;
   RCLCPP_INFO(get_logger(), "Recieve traj request, there are %zu points", goal->trajectory.points.size());
@@ -135,7 +136,7 @@ rclcpp_action::GoalResponse DriverNode::traj_handle_goal(
   auto traj = goal->trajectory.points;
   if (traj.size() <= 1 || traj.size() > 100)
   {
-    RCLCPP_INFO(get_logger(), "Empty trajctory.");
+    RCLCPP_INFO(get_logger(), "Trajctory points size = %ld, [range:<=1 or > 100.]", traj.size());
     return rclcpp_action::GoalResponse::REJECT;
   }
   // 检查起始位置和当前位置的差异，避免较大的初始值跳跃
@@ -275,14 +276,14 @@ rclcpp_action::GoalResponse DriverNode::move_handle_goal(
   }
 
   (void)uuid;
-  if (goal->type == 0)
+  if (goal->type == 0)// 类型，0:MOVJ(关节) 1:MOVJD(笛卡尔关节) 2:MOVL(直线) 3:MOVC(圆弧)
   {
     if (goal->joints_target.size() != 6)
     {
-      RCLCPP_INFO(get_logger(), "goal demension is not right.");
+      RCLCPP_INFO(get_logger(), "joints_target goal demension is not right.");
       return rclcpp_action::GoalResponse::REJECT;
     }
-    RCLCPP_INFO(get_logger(), "Recieve goal target: %.3f,%.3f,%.3f,%.3f,%.3f,%.3f.",
+    RCLCPP_INFO(get_logger(), "Recieve joints_target goal target: %.3f,%.3f,%.3f,%.3f,%.3f,%.3f.",
                 goal->joints_target[0], goal->joints_target[1], goal->joints_target[2],
                 goal->joints_target[3], goal->joints_target[4], goal->joints_target[5]);
     // (TODO) 关节目标范围校验
@@ -291,10 +292,10 @@ rclcpp_action::GoalResponse DriverNode::move_handle_goal(
   {
     if (goal->pos_target.size() != 6)
     {
-      RCLCPP_INFO(get_logger(), "goal demension is not right.");
+      RCLCPP_INFO(get_logger(), "pos_target goal demension is not right.");
       return rclcpp_action::GoalResponse::REJECT;
     }
-    RCLCPP_INFO(get_logger(), "Recieve goal target: %.3f,%.3f,%.3f,%.3f,%.3f,%.3f.",
+    RCLCPP_INFO(get_logger(), "Recieve pos_target goal target: %.3f,%.3f,%.3f,%.3f,%.3f,%.3f.",
                 goal->pos_target[0], goal->pos_target[1], goal->pos_target[2],
                 goal->pos_target[3], goal->pos_target[4], goal->pos_target[5]);
   }

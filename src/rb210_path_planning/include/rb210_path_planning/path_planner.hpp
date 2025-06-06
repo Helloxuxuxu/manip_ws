@@ -12,7 +12,6 @@
 #include <moveit_msgs/msg/collision_object.hpp>
 #include <moveit/robot_model_loader/robot_model_loader.h>
 #include <moveit/robot_state/conversions.h>
-#include <moveit/planning_pipeline/planning_pipeline.h>
 #include <moveit/planning_interface/planning_interface.h>
 #include <moveit/planning_scene_monitor/planning_scene_monitor.h>
 #include <moveit/kinematic_constraints/utils.h>
@@ -110,11 +109,11 @@ public:
   // 内部规划运动接口
   void constructPickPlacePoses(const geometry_msgs::msg::Pose& pick_pose, const geometry_msgs::msg::Pose& place_pose);// 构建抓取放置位姿系列
   int moveP(const std::string target_id);      // 规划至指定位置的api接口
-  int moveL(const std::string target_id);  // 笛卡尔方式规划至指定位置的api接口
+  int moveL(const std::string target_id);      // 笛卡尔方式规划至指定位置的api接口
   int moveJ(const std::string target_id, const std::vector<double> joints);  // 笛卡尔方式规划至指定位置的api接口
   // 先规划后运动的接口
   int planP(const std::string target_id);      // 规划至指定位置的api接口
-  int planL(const std::string target_id);  // 笛卡尔方式规划至指定位置的api接口
+  int planL(const std::string target_id);      // 笛卡尔方式规划至指定位置的api接口
   int planJ(const std::string target_id, const std::vector<double> joints);  // 笛卡尔方式规划至指定位置的api接口
   int combinePaths(moveit_msgs::msg::RobotTrajectory& traj1,moveit_msgs::msg::RobotTrajectory& traj2);
 

@@ -6,9 +6,9 @@ import yaml
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
 from launch_ros.actions import Node, SetParameter
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from ament_index_python.packages import get_package_share_directory
-from launch.substitutions import PathJoinSubstitution
+# from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 
 def launch_setup(context, *args, **kwargs):

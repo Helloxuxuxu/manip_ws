@@ -100,12 +100,12 @@ private:
     }
     // 等待结果
     auto result_future = traj_action_client_->async_get_result(goal_handle);
-    RCLCPP_INFO(get_logger(), "sendTrajGoal Client Waiting for result...");
+    RCLCPP_INFO(get_logger(), "traj_action_client: Client Waiting for result...");
     if (rclcpp::spin_until_future_complete(this->get_node_base_interface(), result_future) ==
         rclcpp::FutureReturnCode::SUCCESS)
     {
       auto result = result_future.get();
-      RCLCPP_INFO(get_logger(), "Goal completed. Result code: %d", static_cast<int>(result.result->error_code));
+      RCLCPP_INFO(get_logger(), "traj_action_client: Goal completed. Result code: %d", static_cast<int>(result.result->error_code));
     }
     else{
       RCLCPP_ERROR(get_logger(), "Failed to get result");
@@ -151,7 +151,7 @@ private:
     
     auto goal_handle = future_goal_handle.get();  // 获取 GoalHandle
     if (!goal_handle) {
-      RCLCPP_ERROR(get_logger(), "Goal was rejected by the action server.");
+      RCLCPP_ERROR(get_logger(), "move_action_client: Goal was rejected by the action server.");
       return;
     }
     // 等待结果
@@ -207,12 +207,17 @@ private:
 int main(int argc, char ** argv)
 {
   rclcpp::init(argc, argv);
-
   auto node = std::make_shared<TestNode>();
+  RCLCPP_INFO(node->get_logger(), "\033[34mNode started!!!\033[30m");
+  // 创建多线程执行器并添加节点
+  // rclcpp::executors::MultiThreadedExecutor executor;
+  // executor.add_node(node);
+  // executor.spin();
 
-  rclcpp::executors::MultiThreadedExecutor executor;
-  executor.add_node(node);
-  executor.spin();
+  // 创建单线程执行器并添加节点
+  rclcpp::executors::SingleThreadedExecutor single_thread_executor;
+  single_thread_executor.add_node(node);
+  single_thread_executor.spin();
 
   rclcpp::shutdown();
   return 0;
